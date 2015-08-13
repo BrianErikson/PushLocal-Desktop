@@ -1,28 +1,40 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+#Autosave files
+*~
 
-# Precompiled Headers
-*.gch
-*.pch
+#build
+[Oo]bj/
+[Bb]in/
+packages/
+TestResults/
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+# globs
+Makefile.in
+*.DS_Store
+*.sln.cache
+*.suo
+*.cache
+*.pidb
+*.userprefs
+*.usertasks
+config.log
+config.make
+config.status
+aclocal.m4
+install-sh
+autom4te.cache/
+*.user
+*.tar.gz
+tarballs/
+test-results/
+Thumbs.db
 
-# Fortran module files
-*.mod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
+#Mac bundle stuff
+*.dmg
 *.app
+
+#resharper
+*_Resharper.*
+*.Resharper
+
+#dotCover
+*.dotCover
