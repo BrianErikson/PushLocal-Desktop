@@ -4,7 +4,7 @@ namespace PushLocal
 {
 	public partial class TestWindow
 	{
-		private global::Gtk.Notebook NotificationTab;
+		private global::Gtk.Notebook Pages;
 		
 		private global::Gtk.ScrolledWindow NotifyScrollbar;
 		
@@ -17,6 +17,12 @@ namespace PushLocal
 		private global::PushLocal.NotificationWidget notificationwidget3;
 		
 		private global::Gtk.Label Notifications;
+		
+		private global::Gtk.ScrolledWindow GtkScrolledWindow;
+		
+		private global::Gtk.TextView NetworkTextArea;
+		
+		private global::Gtk.Label Network;
 
 		protected virtual void Build ()
 		{
@@ -26,11 +32,11 @@ namespace PushLocal
 			this.Title = global::Mono.Unix.Catalog.GetString ("TestWindow");
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			// Container child PushLocal.TestWindow.Gtk.Container+ContainerChild
-			this.NotificationTab = new global::Gtk.Notebook ();
-			this.NotificationTab.CanFocus = true;
-			this.NotificationTab.Name = "NotificationTab";
-			this.NotificationTab.CurrentPage = 0;
-			// Container child NotificationTab.Gtk.Notebook+NotebookChild
+			this.Pages = new global::Gtk.Notebook ();
+			this.Pages.CanFocus = true;
+			this.Pages.Name = "Pages";
+			this.Pages.CurrentPage = 1;
+			// Container child Pages.Gtk.Notebook+NotebookChild
 			this.NotifyScrollbar = new global::Gtk.ScrolledWindow ();
 			this.NotifyScrollbar.CanFocus = true;
 			this.NotifyScrollbar.Name = "NotifyScrollbar";
@@ -75,15 +81,36 @@ namespace PushLocal
 			w4.Fill = false;
 			w1.Add (this.notifyVBox);
 			this.NotifyScrollbar.Add (w1);
-			this.NotificationTab.Add (this.NotifyScrollbar);
+			this.Pages.Add (this.NotifyScrollbar);
 			// Notebook tab
 			this.Notifications = new global::Gtk.Label ();
 			this.Notifications.Name = "Notifications";
 			this.Notifications.Xalign = 1F;
 			this.Notifications.LabelProp = global::Mono.Unix.Catalog.GetString ("Notifications");
-			this.NotificationTab.SetTabLabel (this.NotifyScrollbar, this.Notifications);
+			this.Pages.SetTabLabel (this.NotifyScrollbar, this.Notifications);
 			this.Notifications.ShowAll ();
-			this.Add (this.NotificationTab);
+			// Container child Pages.Gtk.Notebook+NotebookChild
+			this.GtkScrolledWindow = new global::Gtk.ScrolledWindow ();
+			this.GtkScrolledWindow.Name = "GtkScrolledWindow";
+			this.GtkScrolledWindow.ShadowType = ((global::Gtk.ShadowType)(1));
+			// Container child GtkScrolledWindow.Gtk.Container+ContainerChild
+			this.NetworkTextArea = new global::Gtk.TextView ();
+			this.NetworkTextArea.CanFocus = true;
+			this.NetworkTextArea.Name = "NetworkTextArea";
+			this.NetworkTextArea.Editable = false;
+			this.NetworkTextArea.AcceptsTab = false;
+			this.NetworkTextArea.WrapMode = ((global::Gtk.WrapMode)(2));
+			this.GtkScrolledWindow.Add (this.NetworkTextArea);
+			this.Pages.Add (this.GtkScrolledWindow);
+			global::Gtk.Notebook.NotebookChild w9 = ((global::Gtk.Notebook.NotebookChild)(this.Pages [this.GtkScrolledWindow]));
+			w9.Position = 1;
+			// Notebook tab
+			this.Network = new global::Gtk.Label ();
+			this.Network.Name = "Network";
+			this.Network.LabelProp = global::Mono.Unix.Catalog.GetString ("Network");
+			this.Pages.SetTabLabel (this.GtkScrolledWindow, this.Network);
+			this.Network.ShowAll ();
+			this.Add (this.Pages);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
