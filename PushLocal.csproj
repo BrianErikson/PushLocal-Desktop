@@ -68,7 +68,8 @@
     <Compile Include="Windows\MainWindow.cs" />
     <Compile Include="Windows\Test\NotificationWidget.cs" />
     <Compile Include="Windows\Test\TestWindow.cs" />
-    <Compile Include="Updater.cs" />
+    <Compile Include="Server\TcpListener.cs" />
+    <Compile Include="Server\OnConnectListener.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
