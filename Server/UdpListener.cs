@@ -57,8 +57,9 @@ namespace PushLocal
 		private void HandleMessage(string msg) {
 			consoleMsgs.Enqueue (msg);
 			if (msg.Contains ("broadcast")) {
-				consoleMsgs.Enqueue ("Sending message" + " " + Dns.GetHostName());
-				data = Encoding.ASCII.GetBytes (Dns.GetHostName ());
+				string sending = "hostName" + NetSeperator.UNIT + Dns.GetHostName (); 
+				consoleMsgs.Enqueue ("Sending message" + " " + sending);
+				data = Encoding.ASCII.GetBytes (sending);
 				sock.Send (data, data.Length, sender);
 			} else if (msg.Contains ("connect")) {
 				consoleMsgs.Enqueue ("Attempting to connect to sender");

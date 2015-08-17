@@ -70,6 +70,7 @@
     <Compile Include="Windows\Test\TestWindow.cs" />
     <Compile Include="Server\TcpListener.cs" />
     <Compile Include="Server\OnConnectListener.cs" />
+    <Compile Include="Server\NetSeperator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
