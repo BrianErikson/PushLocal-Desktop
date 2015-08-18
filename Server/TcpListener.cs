@@ -27,9 +27,23 @@ namespace PushLocal
 			consoleMsgs.Enqueue ("Attempting to connect to " + dest.Address.ToString() + ":7777");
 			tcpSock.Connect (new IPEndPoint(dest.Address, 7777));
 
-			consoleMsgs.Enqueue ("Connected to " + dest.Address.ToString() + ":7777 successfully");
+			if (IsConnected ()) {
+				consoleMsgs.Enqueue ("Connected to " + dest.Address.ToString() + ":7777 successfully");
+				tcpSock.Client.Send(Encoding.ASCII.GetBytes("connected"));
+			}
+			else
+				consoleMsgs.Enqueue ("Connection to " + dest.Address.ToString() + ":7777 failed");
 			// TODO: Begin listening for messages, and do certain things depending on the msg
 			//tcpSock.Client.BeginReceive
+		}
+
+		private bool IsConnected() {
+			try {
+				return !(tcpSock.Client.Poll(1, SelectMode.SelectRead) && tcpSock.Client.Available == 0);
+			}
+			catch (SocketException) { 
+				return false; 
+			}
 		}
 	}
 }

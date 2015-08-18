@@ -42,6 +42,7 @@ namespace PushLocal
 			IPEndPoint sender = (IPEndPoint)state;
 			tcpListener = new TcpListener (sender, consoleMsgs);
 			tcpThread = new Thread (new ThreadStart (tcpListener.Start));
+			tcpThread.Start ();
 		}
 
 		public static Server fetch() {
