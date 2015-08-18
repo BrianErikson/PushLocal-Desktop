@@ -44,11 +44,6 @@ namespace PushLocal
 					return;
 				}
 
-				consoleMsgs.Enqueue ("Sending message" + " " + retString);
-
-				data = Encoding.ASCII.GetBytes (retString);
-				sock.Send (data, data.Length, sender);
-
 				Thread.Sleep (0);
 			}
 		}
