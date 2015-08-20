@@ -14,8 +14,7 @@ namespace PushLocal
 		private ConcurrentQueue<string> consoleMsgs;
 		private IPEndPoint dest;
 
-		public TcpListener (IPEndPoint ep, ConcurrentQueue<string> consoleMsgs)
-		{
+		public TcpListener (IPEndPoint ep, ConcurrentQueue<string> consoleMsgs) {
 			this.consoleMsgs = consoleMsgs;
 			this.dest = ep;
 		}
@@ -26,15 +25,28 @@ namespace PushLocal
 
 			consoleMsgs.Enqueue ("Attempting to connect to " + dest.Address.ToString() + ":5577");
 			tcpSock.Connect (new IPEndPoint(dest.Address, 5577));
+			tcpSock.Client.Send(Encoding.ASCII.GetBytes("connected"));
 
-			if (IsConnected ()) {
-				consoleMsgs.Enqueue ("Connected to " + dest.Address.ToString() + ":5577 successfully");
-				tcpSock.Client.Send(Encoding.ASCII.GetBytes("connected"));
+			byte[] data = new byte[1024];
+			while (Program.isRunning) {
+				tcpSock.Client.Receive (data);
+				string msg = Encoding.ASCII.GetString (data);
+				consoleMsgs.Enqueue ("TCP Msg: " + msg);
+				HandleMessage (msg);
+				Thread.Sleep (0);
 			}
-			else
-				consoleMsgs.Enqueue ("Connection to " + dest.Address.ToString() + ":5577 failed");
-			// TODO: Begin listening for messages, and do certain things depending on the msg
-			//tcpSock.Client.BeginReceive
+		}
+
+		public void HandleMessage(string msg) {
+			if (msg.Contains ("Indeed,")) {
+				tcpSock.Client.Send(Encoding.ASCII.GetBytes("Nice comma."));
+			}
+		}
+
+		public TcpClient GetSocket() {
+			lock (this) {
+				return tcpSock;
+			}
 		}
 
 		private bool IsConnected() {
