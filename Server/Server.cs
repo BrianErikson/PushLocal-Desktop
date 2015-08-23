@@ -63,6 +63,7 @@ namespace PushLocal
 
 		public void Stop() {
 			udpListener.Stop ();
+			tcpListener.Stop ();
 		}
 	}
 

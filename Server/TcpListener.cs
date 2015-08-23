@@ -38,7 +38,14 @@ namespace PushLocal
 		}
 
 		public void HandleMessage(string msg) {
-			if (msg.Contains ("Indeed,")) {
+			if (msg.Contains ("notification")) {
+				string[] split = msg.Split (NetSeperator.UNIT);
+				string title = split [1];
+				string text = split [2];
+				string subText = split [3];
+				consoleMsgs.Enqueue ("Title: " + title + " Text: " + text + " Subtext: " + subText);
+			}
+			else if (msg.Contains ("Indeed,")) {
 				tcpSock.Client.Send(Encoding.ASCII.GetBytes("Nice comma."));
 			}
 		}
@@ -56,6 +63,10 @@ namespace PushLocal
 			catch (SocketException) { 
 				return false; 
 			}
+		}
+
+		public void Stop() {
+			tcpSock.Close ();
 		}
 	}
 }
