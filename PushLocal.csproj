@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -50,6 +50,8 @@
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <Reference Include="Windows.UI" />
+    <Reference Include="Windows.UI.Xaml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -73,9 +75,11 @@
     <Compile Include="Server\NetSeperator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Server\" />
-    <Folder Include="Windows\" />
-    <Folder Include="Windows\Test\" />
+    <ProjectReference Include="PushLocal-Windows\PushLocal-Windows.csproj">
+      <Project>{CEDDA721-4947-42BD-BDB9-A789081FEA2A}</Project>
+      <Name>PushLocal-Windows</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

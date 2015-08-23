@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
+using PushLocalWindows;
 
 namespace PushLocal
 {
@@ -44,6 +45,7 @@ namespace PushLocal
 				string text = split [2];
 				string subText = split [3];
 				consoleMsgs.Enqueue ("Title: " + title + " Text: " + text + " Subtext: " + subText);
+				Notification.Post (title, text, subText);
 			}
 			else if (msg.Contains ("Indeed,")) {
 				tcpSock.Client.Send(Encoding.ASCII.GetBytes("Nice comma."));
