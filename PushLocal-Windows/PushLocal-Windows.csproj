@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -37,6 +37,9 @@
     <Reference Include="System.Runtime">
       <HintPath>C:\Program Files %28x86%29\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.1\Facades\System.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="Interop.IWshRuntimeLibrary">
+      <HintPath>Libs\Interop.IWshRuntimeLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -52,9 +55,6 @@
     <Compile Include="Notification.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="NotificationsExtensions\" />
-  </ItemGroup>
   <ItemGroup>
     <None Include="NotificationsExtensions\NotificationsExtensions.csproj" />
     <None Include="NotificationsExtensions\bin\Debug\NotificationsExtensions.pdb" />
@@ -79,5 +79,11 @@
     <None Include="NotificationsExtensions\obj\Debug\qualifiers.txt.intermediate" />
     <None Include="NotificationsExtensions\obj\Debug\resources.resfiles" />
     <None Include="NotificationsExtensions\obj\Debug\resources.resfiles.intermediate" />
+    <None Include="Libs\Interop.IWshRuntimeLibrary.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Libs\" />
   </ItemGroup>
 </Project>
