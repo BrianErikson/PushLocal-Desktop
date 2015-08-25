@@ -48,37 +48,11 @@
     <Compile Include="NotificationsExtensions\ContentInterfaces.cs" />
     <Compile Include="NotificationsExtensions\TileContent.cs" />
     <Compile Include="NotificationsExtensions\ToastContent.cs" />
-    <Compile Include="NotificationsExtensions\obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="NotificationsExtensions\obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="NotificationsExtensions\obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
-    <Compile Include="NotificationsExtensions\Properties\AssemblyInfo.cs" />
     <Compile Include="Notification.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="NotificationsExtensions\NotificationsExtensions.csproj" />
-    <None Include="NotificationsExtensions\bin\Debug\NotificationsExtensions.pdb" />
-    <None Include="NotificationsExtensions\bin\Debug\NotificationsExtensions.pri" />
-    <None Include="NotificationsExtensions\bin\Debug\NotificationsExtensions.winmd" />
-    <None Include="NotificationsExtensions\bin\Debug\NotificationsExtensions.XML" />
-    <None Include="NotificationsExtensions\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <None Include="NotificationsExtensions\obj\Debug\layout.resfiles" />
-    <None Include="NotificationsExtensions\obj\Debug\layout.resfiles.intermediate" />
-    <None Include="NotificationsExtensions\obj\Debug\MultipleQualifiersPerDimensionFound.txt" />
-    <None Include="NotificationsExtensions\obj\Debug\NotificationsExtensions.compile.pdb" />
-    <None Include="NotificationsExtensions\obj\Debug\NotificationsExtensions.csproj.FileListAbsolute.txt" />
-    <None Include="NotificationsExtensions\obj\Debug\NotificationsExtensions.pdb" />
-    <None Include="NotificationsExtensions\obj\Debug\NotificationsExtensions.winmd" />
-    <None Include="NotificationsExtensions\obj\Debug\NotificationsExtensions.winmdobj" />
-    <None Include="NotificationsExtensions\obj\Debug\NotificationsExtensions.xml" />
-    <None Include="NotificationsExtensions\obj\Debug\pri.resfiles" />
-    <None Include="NotificationsExtensions\obj\Debug\pri.resfiles.intermediate" />
-    <None Include="NotificationsExtensions\obj\Debug\priconfig.xml" />
-    <None Include="NotificationsExtensions\obj\Debug\priconfig.xml.intermediate" />
-    <None Include="NotificationsExtensions\obj\Debug\qualifiers.txt" />
-    <None Include="NotificationsExtensions\obj\Debug\qualifiers.txt.intermediate" />
-    <None Include="NotificationsExtensions\obj\Debug\resources.resfiles" />
-    <None Include="NotificationsExtensions\obj\Debug\resources.resfiles.intermediate" />
     <None Include="Libs\Interop.IWshRuntimeLibrary.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
