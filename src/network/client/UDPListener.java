@@ -31,7 +31,7 @@ public class UDPListener extends Thread {
             logs.add("Socket set up on " + socket.getLocalSocketAddress().toString());
             logs.add("Waiting for an incoming request...");
 
-            while (netClient.isRunning()) {
+            while (netClient.isRunning() && !socket.isClosed()) {
                 socket.receive(packet);
                 logs.add("UDP Message recieved from: " + packet.getAddress().toString());
                 handleMessage(packet);
@@ -56,5 +56,9 @@ public class UDPListener extends Thread {
             logs.add("Attemping to connect to sender: " + packet.getAddress());
             listener.onConnectRequest(packet.getAddress());
         }
+    }
+
+    public void dispose() {
+        socket.close();
     }
 }

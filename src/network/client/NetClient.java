@@ -27,8 +27,8 @@ public class NetClient extends Thread {
         NetClient _this = this;
         udpListener = new UDPListener(this, logs, _this::connect);
         udpListener.setDaemon(true);
-
         udpListener.start();
+
         running = true;
     }
 
@@ -66,5 +66,12 @@ public class NetClient extends Thread {
         tcpListener = new TCPListener(this, logs, address);
         tcpListener.setDaemon(true);
         tcpListener.start();
+    }
+
+    public void dispose() throws IOException {
+        this.running = false;
+        udpListener.dispose();
+        if (tcpListener != null)
+            tcpListener.dispose();
     }
 }
