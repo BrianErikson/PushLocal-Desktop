@@ -1,5 +1,8 @@
 package common;
 
+import main.PushLocal;
+
+import java.awt.*;
 import java.io.IOException;
 
 /**
@@ -8,8 +11,7 @@ import java.io.IOException;
 public class Notification {
     public static void Post(String title, String text, String subText) throws IOException {
         if (OsUtils.isWindows()) {
-            // TODO: Create a tray icon and post it that way
-            // http://docs.oracle.com/javase/6/docs/api/java/awt/TrayIcon.html
+            PushLocal.fetch().getTrayIcon().displayMessage(title, text + "\n" + subText, TrayIcon.MessageType.INFO);
         }
         else if (OsUtils.isLinux()) {
             Runtime.getRuntime().exec(new String[]{

@@ -17,4 +17,10 @@ public class StageController {
     public Stage getStage() {
         return stage;
     }
+
+    public void showStage() {
+        this.stage.setWidth(1024);
+        this.stage.setHeight(768);
+        this.stage.setMaximized(true);
+    }
 }
