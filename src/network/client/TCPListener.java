@@ -1,5 +1,7 @@
 package network.client;
 
+import common.Notification;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -26,7 +28,6 @@ public class TCPListener extends Thread {
     public void run() {
         super.run();
 
-        // TODO: connect to socket before while loop
         try {
             socket = new Socket(address, 5577);
             sendMessage("connected");
@@ -48,9 +49,10 @@ public class TCPListener extends Thread {
         }
     }
 
-    private void handleMessage(byte[] data) {
+    private void handleMessage(byte[] data) throws IOException {
         // TODO: Detemine what file type was sent
         String msg = new String(data);
+        msg = msg.trim();
         logs.add("TCP Message recieved: " + msg);
 
         if (msg.contains("notification")) {
@@ -59,7 +61,7 @@ public class TCPListener extends Thread {
             String text = split[2];
             String subText = split[3];
             logs.add("Title: " + title + " Text: " + text + " Subtext: " + subText);
-            // TODO: Post notification
+            Notification.Post(title, text, subText);
         }
         else if (msg.contains("Indeed,")) {
             sendMessage("Nice comma.");
