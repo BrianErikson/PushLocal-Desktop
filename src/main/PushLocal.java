@@ -48,7 +48,8 @@ public class PushLocal extends Application {
         stageController.setStage(new DebugMenu(LOGGER, 1024, 768));
         log("Application initialized");
 
-        trayIcon.addActionListener(e -> Platform.runLater(stageController::showStage));
+        if (trayIcon != null)
+            trayIcon.addActionListener(e -> Platform.runLater(stageController::showStage));
 
         netClient = new NetClient(this);
         netClient.setDaemon(true);

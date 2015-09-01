@@ -35,18 +35,27 @@ public class TCPListener extends Thread {
             byte[] data = new byte[PACKET_SIZE];
 
             while (netClient.isRunning() && !socket.isClosed()) {
-                if (socket.getInputStream().available() >= 0) {
-                    socket.getInputStream().read(data);
-
-                    logs.add("Recieved Message from " + socket.getInetAddress().getHostName());
-                    handleMessage(data);
-                    data = new byte[PACKET_SIZE];
-                    Thread.sleep(0);
-                }
+                int len = socket.getInputStream().read(data);
+                if (len < 0)
+                    break;
+                logs.add("Received Message from " + socket.getInetAddress().getHostName());
+                handleMessage(data);
+                data = new byte[PACKET_SIZE];
+                Thread.sleep(0);
             }
         } catch (IOException | InterruptedException e) {
             logs.add(e.getMessage());
         }
+
+        if (socket.isConnected()) {
+            try {
+                dispose();
+            } catch (IOException e) {
+                logs.add(e.getMessage());
+            }
+        }
+
+        logs.add("TCP socket disconnected");
     }
 
     private void handleMessage(byte[] data) throws IOException {

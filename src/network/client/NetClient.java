@@ -54,7 +54,9 @@ public class NetClient extends Thread {
     }
 
     public synchronized void connect(InetAddress address) {
+        logs.add("Connection requested...");
         if (tcpListener != null && tcpListener.isAlive()) {
+            logs.add("TCP Listener already connected to a source. Attempting to close current connection.");
             try {
                 tcpListener.dispose();
                 tcpListener.join();
@@ -63,6 +65,7 @@ public class NetClient extends Thread {
             }
         }
 
+        logs.add("Starting new TCP listener");
         tcpListener = new TCPListener(this, logs, address);
         tcpListener.setDaemon(true);
         tcpListener.start();
