@@ -1,10 +1,9 @@
 package network.client;
 
-import common.Notification;
+import common.OsUtils;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -70,7 +69,7 @@ public class TCPListener extends Thread {
             String text = split[2];
             String subText = split[3];
             logs.add("Title: " + title + " Text: " + text + " Subtext: " + subText);
-            Notification.Post(title, text, subText);
+            OsUtils.Post(title, text, subText);
         }
         else if (msg.contains("Indeed,")) {
             sendMessage("Nice comma.");

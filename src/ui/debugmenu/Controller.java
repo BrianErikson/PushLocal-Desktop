@@ -1,17 +1,17 @@
 package ui.debugmenu;
 
-import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.*;
 
 public class Controller implements Initializable {
+    @FXML
+    public VBox notification_box;
     @FXML
     private TextArea console;
 

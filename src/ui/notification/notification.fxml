@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane minHeight="42.0" minWidth="210.0" onMouseClicked="#onMouseClicked" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.notification.NotificationController">
+   <children>
+      <ImageView fx:id="imageView" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="5.0" translateY="5.0" AnchorPane.leftAnchor="1.0">
+         <image>
+            <Image url="@../../main/PL.png" />
+         </image>
+      </ImageView>
+      <VBox layoutX="42.0" layoutY="5.0">
+         <children>
+            <Label fx:id="title" text="Title" />
+            <Label fx:id="text" text="This is text">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="subText" text="This is subtext">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Label fx:id="time" layoutX="92.0" layoutY="9.0" text="0:00 AM" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="5.0">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

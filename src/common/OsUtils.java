@@ -1,5 +1,10 @@
 package common;
 
+import main.PushLocal;
+
+import java.awt.*;
+import java.io.IOException;
+
 /**
  * Created by brian on 8/30/15.
  */
@@ -19,5 +24,21 @@ public class OsUtils {
 
     public static boolean isLinux() {
         return getOsName().startsWith("Linux");
+    }
+
+    public static void Post(String title, String text, String subText) throws IOException {
+        PushLocal pl = PushLocal.fetch();
+        if (isWindows()) {
+            pl.getTrayIcon().displayMessage(title, text + "\n" + subText, TrayIcon.MessageType.NONE);
+        }
+        else if (isLinux()) {
+            Runtime.getRuntime().exec(new String[]{
+                    "notify-send",
+                    title,
+                    text + "\\n<i>"
+                            + subText + "</i>",
+                    //TODO "-i " + pl.getIconPath()
+            });
+        }
     }
 }

@@ -1,6 +1,6 @@
 package main;
 
-import common.Notification;
+import common.OsUtils;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
@@ -10,8 +10,6 @@ import ui.StageController;
 import ui.debugmenu.DebugMenu;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -55,7 +53,7 @@ public class PushLocal extends Application {
         netClient.setDaemon(true);
         netClient.start();
 
-        Notification.Post("Test", "First Line", "Second Line");
+        OsUtils.Post("Test", "First Line", "Second Line");
     }
 
     private void initIconPath() throws URISyntaxException {
@@ -95,6 +93,7 @@ public class PushLocal extends Application {
     public void stop() throws Exception {
         super.stop();
         netClient.dispose();
-        SystemTray.getSystemTray().remove(trayIcon);
+        if (trayIcon != null)
+            SystemTray.getSystemTray().remove(trayIcon);
     }
 }
