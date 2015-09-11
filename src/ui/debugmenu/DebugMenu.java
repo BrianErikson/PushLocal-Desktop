@@ -19,7 +19,7 @@ public class DebugMenu extends Stage {
             loader.load();
             debugController = loader.getController();
             debugController.setLog(log);
-            debugController.addNotification((AnchorPane) FXMLLoader.load(NotificationController.class.getResource("notification.fxml")));
+            debugController.addNotification(FXMLLoader.load(NotificationController.class.getResource("notification.fxml")));
             SplitPane root = loader.getRoot();
             setScene(new Scene(root, width, height));
         } catch (IOException e) {

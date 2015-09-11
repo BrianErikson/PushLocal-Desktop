@@ -8,11 +8,12 @@
   <items>
       <AnchorPane>
          <children>
-             <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                <content>
-                    <VBox fx:id="notification_box" alignment="CENTER" />
-                </content>
+             <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" minWidth="210.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <content>
+                  <FlowPane fx:id="notification_box" maxWidth="-Infinity" minWidth="210.0" prefWidth="210.0" rowValignment="TOP" vgap="2.0" />
+               </content>
              </ScrollPane>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
          </children>
       </AnchorPane>
       <AnchorPane>

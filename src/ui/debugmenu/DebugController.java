@@ -5,14 +5,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.FlowPane;
 
 import java.net.URL;
 import java.util.*;
 
 public class DebugController implements Initializable {
     @FXML
-    public VBox notification_box;
+    public FlowPane notification_box;
     @FXML
     private TextArea console;
 
