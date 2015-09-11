@@ -26,7 +26,7 @@ public class OsUtils {
         return getOsName().startsWith("Linux");
     }
 
-    public static void Post(String title, String text, String subText) throws IOException {
+    public static void PostNotification(String title, String text, String subText) throws IOException {
         PushLocal pl = PushLocal.fetch();
         if (isWindows()) {
             pl.getTrayIcon().displayMessage(title, text + "\n" + subText, TrayIcon.MessageType.NONE);

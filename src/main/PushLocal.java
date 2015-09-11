@@ -53,7 +53,7 @@ public class PushLocal extends Application {
         netClient.setDaemon(true);
         netClient.start();
 
-        OsUtils.Post("Test", "First Line", "Second Line");
+        OsUtils.PostNotification("Test", "First Line", "Second Line");
     }
 
     private void initIconPath() throws URISyntaxException {

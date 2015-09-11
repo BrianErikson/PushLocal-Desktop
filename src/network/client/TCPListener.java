@@ -69,7 +69,7 @@ public class TCPListener extends Thread {
             String text = split[2];
             String subText = split[3];
             logs.add("Title: " + title + " Text: " + text + " Subtext: " + subText);
-            OsUtils.Post(title, text, subText);
+            OsUtils.PostNotification(title, text, subText);
         }
         else if (msg.contains("Indeed,")) {
             sendMessage("Nice comma.");

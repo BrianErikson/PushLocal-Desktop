@@ -1,26 +1,25 @@
 package ui.debugmenu;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableStringValue;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import ui.notification.NotificationController;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class DebugMenu extends Stage {
-    private Controller controller;
+    private DebugController debugController;
 
     public DebugMenu(SimpleStringProperty log, int width, int height) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("debugMenu.fxml"));
         try {
             loader.load();
-            controller = loader.getController();
-            controller.setLog(log);
+            debugController = loader.getController();
+            debugController.setLog(log);
+            debugController.addNotification((AnchorPane) FXMLLoader.load(NotificationController.class.getResource("notification.fxml")));
             SplitPane root = loader.getRoot();
             setScene(new Scene(root, width, height));
         } catch (IOException e) {
