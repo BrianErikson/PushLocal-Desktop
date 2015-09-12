@@ -3,6 +3,7 @@ package ui.debugmenu;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -40,5 +41,10 @@ public class DebugController implements Initializable {
 
     public void addNotification(Node notification) {
         notification_box.getChildren().add(notification);
+    }
+
+    public void onFilterRemove(ActionEvent event) {
+        String item = filterList.getSelectionModel().getSelectedItem();
+        filterList.getItems().remove(item);
     }
 }

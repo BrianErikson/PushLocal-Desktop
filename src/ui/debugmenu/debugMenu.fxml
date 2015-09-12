@@ -8,24 +8,26 @@
     <items>
         <AnchorPane>
             <children>
-                <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" minWidth="230.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" minWidth="230.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="20.0">
                     <content>
                         <FlowPane fx:id="notification_box" maxWidth="-Infinity" minWidth="210.0" prefWidth="210.0" rowValignment="TOP" vgap="2.0" />
                     </content>
                 </ScrollPane>
-            <ScrollPane layoutX="235.0" prefHeight="232.0" prefWidth="219.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="235.0" AnchorPane.topAnchor="0.0">
+            <ScrollPane layoutX="235.0" prefHeight="232.0" prefWidth="219.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="235.0" AnchorPane.topAnchor="20.0">
                <content>
-                  <ListView fx:id="filterList" prefWidth="200.0">
+                  <ListView fx:id="filterList" prefHeight="210.0" prefWidth="217.0">
                      <contextMenu>
                         <ContextMenu fx:id="filterContextMenu">
                           <items>
-                            <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                            <MenuItem mnemonicParsing="false" text="Remove Filter" onAction="#onFilterRemove"/>
                           </items>
                         </ContextMenu>
                      </contextMenu>
                   </ListView>
                </content>
             </ScrollPane>
+            <Label layoutX="277.0" text="Filtered Notifications" AnchorPane.topAnchor="2.0" />
+            <Label layoutX="74.0" text="Notifications" AnchorPane.topAnchor="2.0" />
             </children>
         </AnchorPane>
         <AnchorPane>
