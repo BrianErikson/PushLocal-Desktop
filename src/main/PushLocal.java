@@ -4,10 +4,8 @@ import common.OsUtils;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import network.client.NetClient;
 import ui.StageController;
@@ -62,7 +60,7 @@ public class PushLocal extends Application {
         netClient.setDaemon(true);
         netClient.start();
 
-        postNotification("Test", "First Line", "Second Line");
+        postNotification("PushLocal.Desktop", "Test", "First Line", "Second Line");
     }
 
     private void initIconPath() throws URISyntaxException {
@@ -103,18 +101,19 @@ public class PushLocal extends Application {
     }
 
     // main & TCP thread
-    public synchronized void postNotification(String title, String text, String subText) throws IOException {
+    public synchronized void postNotification(String from, String title, String text, String subText) throws IOException {
         OsUtils.postNotification(title, text, subText);
 
         FXMLLoader loader = new FXMLLoader(NotificationController.class.getResource("notification.fxml"));
         Node notification = loader.load();
         NotificationController controller = loader.getController();
+        controller.setFrom(from);
         controller.setTitle(title);
         controller.setText(text);
         controller.setSubText(subText);
         notificationNodes.add(notification);
         if (stageController.getStage() instanceof DebugMenu) {
-            ((DebugMenu) stageController.getStage()).addNotification(notification);
+            Platform.runLater(() -> ((DebugMenu) stageController.getStage()).addNotification(notification));
         }
     }
 

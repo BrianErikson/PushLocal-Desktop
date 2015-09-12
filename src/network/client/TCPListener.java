@@ -66,11 +66,13 @@ public class TCPListener extends Thread {
 
         if (msg.contains("notification")) {
             String[] split = msg.split(NetClient.UNIT);
-            String title = split[1];
-            String text = split[2];
-            String subText = split[3];
-            logs.add("Title: " + title + " Text: " + text + " Subtext: " + subText);
-            PushLocal.fetch().postNotification(title, text, subText);
+            String from = split[1]; // split[0] is the type of message, in this case, "notification"
+            String title = split[2];
+            String text = split[3];
+            String subText = split[4];
+            logs.add("From: " + from + "Title: " + title + " Text: " + text + " Subtext: " + subText);
+            PushLocal.fetch().postNotification(from,
+                    title, text, subText);
         }
         else if (msg.contains("Indeed,")) {
             sendMessage("Nice comma.");

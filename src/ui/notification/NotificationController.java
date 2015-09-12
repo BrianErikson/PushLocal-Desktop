@@ -34,12 +34,17 @@ public class NotificationController implements Initializable {
     public ImageView imageView;
 
     private ContextMenu contextMenu;
+    private String from;
 
     public void setAll(Image image, String title, String text, String subText) {
         setImage(image);
         setTitle(title);
         setText(text);
         setSubText(subText);
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
     }
 
     public void setImage(Image image) {
