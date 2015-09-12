@@ -3,6 +3,7 @@ package ui.debugmenu;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -26,7 +27,7 @@ public class DebugController implements Initializable {
     }
 
 
-    public void addNotification(AnchorPane pane) {
-        notification_box.getChildren().add(pane);
+    public void addNotification(Node notification) {
+        notification_box.getChildren().add(notification);
     }
 }

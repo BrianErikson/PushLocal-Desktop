@@ -1,6 +1,7 @@
 package network.client;
 
 import common.OsUtils;
+import main.PushLocal;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -69,7 +70,7 @@ public class TCPListener extends Thread {
             String text = split[2];
             String subText = split[3];
             logs.add("Title: " + title + " Text: " + text + " Subtext: " + subText);
-            OsUtils.PostNotification(title, text, subText);
+            PushLocal.fetch().postNotification(title, text, subText);
         }
         else if (msg.contains("Indeed,")) {
             sendMessage("Nice comma.");

@@ -4,15 +4,22 @@ import common.OsUtils;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import network.client.NetClient;
 import ui.StageController;
 import ui.debugmenu.DebugMenu;
+import ui.notification.NotificationController;
 
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * Created by brian on 8/29/15.
@@ -25,6 +32,7 @@ public class PushLocal extends Application {
     private NetClient netClient;
     private TrayIcon trayIcon;
     private String iconPath;
+    private ArrayList<Node> notificationNodes;
 
     public static void main(String[] args) {
         launch(args);
@@ -43,7 +51,8 @@ public class PushLocal extends Application {
         primaryStage.close(); // Get rid of useless init stage
 
         stageController = new StageController();
-        stageController.setStage(new DebugMenu(LOGGER, 1024, 768));
+        notificationNodes = new ArrayList<>();
+        stageController.setStage(new DebugMenu(LOGGER, 1024, 768, notificationNodes));
         log("Application initialized");
 
         if (trayIcon != null)
@@ -53,7 +62,7 @@ public class PushLocal extends Application {
         netClient.setDaemon(true);
         netClient.start();
 
-        OsUtils.PostNotification("Test", "First Line", "Second Line");
+        postNotification("Test", "First Line", "Second Line");
     }
 
     private void initIconPath() throws URISyntaxException {
@@ -87,6 +96,26 @@ public class PushLocal extends Application {
 
     public String getIconPath() {
         return iconPath;
+    }
+
+    public Stage getStage() {
+        return stageController.getStage();
+    }
+
+    // main & TCP thread
+    public synchronized void postNotification(String title, String text, String subText) throws IOException {
+        OsUtils.postNotification(title, text, subText);
+
+        FXMLLoader loader = new FXMLLoader(NotificationController.class.getResource("notification.fxml"));
+        Node notification = loader.load();
+        NotificationController controller = loader.getController();
+        controller.setTitle(title);
+        controller.setText(text);
+        controller.setSubText(subText);
+        notificationNodes.add(notification);
+        if (stageController.getStage() instanceof DebugMenu) {
+            ((DebugMenu) stageController.getStage()).addNotification(notification);
+        }
     }
 
     @Override
