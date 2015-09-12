@@ -3,7 +3,11 @@ package main;
 import common.OsUtils;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.stage.Stage;
@@ -26,6 +30,7 @@ public class PushLocal extends Application {
 
     private static PushLocal singleton;
     private static SimpleStringProperty LOGGER = new SimpleStringProperty("Application initializing...");
+    private ObservableList<String> filteredNotifications;
     private StageController stageController;
     private NetClient netClient;
     private TrayIcon trayIcon;
@@ -50,7 +55,8 @@ public class PushLocal extends Application {
 
         stageController = new StageController();
         notificationNodes = new ArrayList<>();
-        stageController.setStage(new DebugMenu(LOGGER, 1024, 768, notificationNodes));
+        filteredNotifications = FXCollections.observableArrayList();
+        stageController.setStage(new DebugMenu(filteredNotifications, LOGGER, 1024, 768, notificationNodes));
         log("Application initialized");
 
         if (trayIcon != null)
@@ -100,20 +106,32 @@ public class PushLocal extends Application {
     }
 
     // main & TCP thread
-    public synchronized void postNotification(String from, String title, String text, String subText) throws IOException {
-        OsUtils.postNotification(title, text, subText);
-
-        FXMLLoader loader = new FXMLLoader(NotificationController.class.getResource("notification.fxml"));
-        Node notification = loader.load();
-        NotificationController controller = loader.getController();
-        controller.setFrom(from);
-        controller.setTitle(title);
-        controller.setText(text);
-        controller.setSubText(subText);
-        notificationNodes.add(notification);
-        if (stageController.getStage() instanceof DebugMenu) {
-            Platform.runLater(() -> ((DebugMenu) stageController.getStage()).addNotification(notification));
+    public synchronized void postNotification(String origin, String title, String text, String subText) throws IOException {
+        boolean filtered = false;
+        for (String s : filteredNotifications) {
+            if (s.contains(origin))
+                filtered = true;
         }
+
+        if (!filtered) {
+            OsUtils.postNotification(title, text, subText);
+
+            FXMLLoader loader = new FXMLLoader(NotificationController.class.getResource("notification.fxml"));
+            Node notification = loader.load();
+            NotificationController controller = loader.getController();
+            controller.setOrigin(origin);
+            controller.setTitle(title);
+            controller.setText(text);
+            controller.setSubText(subText);
+            notificationNodes.add(notification);
+            if (stageController.getStage() instanceof DebugMenu) {
+                Platform.runLater(() -> ((DebugMenu) stageController.getStage()).addNotification(notification));
+            }
+        }
+    }
+
+    public void addFilteredNotification(String origin) {
+        filteredNotifications.add(origin);
     }
 
     @Override

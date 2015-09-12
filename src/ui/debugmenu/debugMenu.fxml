@@ -1,29 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<SplitPane xmlns:fx="http://javafx.com/fxml/1" dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-           minWidth="-Infinity" orientation="VERTICAL" prefHeight="474.0" prefWidth="736.0"
-           xmlns="http://javafx.com/javafx/null" fx:controller="ui.debugmenu.DebugController">
+
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="474.0" prefWidth="736.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.debugmenu.DebugController">
     <items>
         <AnchorPane>
             <children>
-                <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" minWidth="230.0"
-                            AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" minWidth="230.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <content>
-                        <FlowPane fx:id="notification_box" maxWidth="-Infinity" minWidth="210.0" prefWidth="210.0"
-                                  rowValignment="TOP" vgap="2.0"/>
+                        <FlowPane fx:id="notification_box" maxWidth="-Infinity" minWidth="210.0" prefWidth="210.0" rowValignment="TOP" vgap="2.0" />
                     </content>
                 </ScrollPane>
-                <Separator orientation="VERTICAL" prefHeight="200.0"/>
+            <ScrollPane layoutX="235.0" prefHeight="232.0" prefWidth="219.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="235.0" AnchorPane.topAnchor="0.0">
+               <content>
+                  <ListView fx:id="filterList" prefWidth="200.0">
+                     <contextMenu>
+                        <ContextMenu fx:id="filterContextMenu">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                          </items>
+                        </ContextMenu>
+                     </contextMenu>
+                  </ListView>
+               </content>
+            </ScrollPane>
             </children>
         </AnchorPane>
         <AnchorPane>
             <children>
-                <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0"
-                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <content>
-                        <TextArea fx:id="console" editable="false" wrapText="true"/>
+                        <TextArea fx:id="console" editable="false" wrapText="true" />
                     </content>
                 </ScrollPane>
             </children>

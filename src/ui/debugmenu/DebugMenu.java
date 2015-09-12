@@ -1,6 +1,8 @@
 package ui.debugmenu;
 
+import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -13,12 +15,13 @@ import java.util.ArrayList;
 public class DebugMenu extends Stage {
     private DebugController debugController;
 
-    public DebugMenu(SimpleStringProperty log, int width, int height, ArrayList<Node> notifications) {
+    public DebugMenu(ObservableList<String> filterList, SimpleStringProperty log, int width, int height, ArrayList<Node> notifications) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("debugMenu.fxml"));
         try {
             loader.load();
             debugController = loader.getController();
             debugController.setLog(log);
+            debugController.setFilterList(filterList);
             notifications.forEach(this::addNotification);
             SplitPane root = loader.getRoot();
             setScene(new Scene(root, width, height));

@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
+import main.PushLocal;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -34,17 +35,39 @@ public class NotificationController implements Initializable {
     public ImageView imageView;
 
     private ContextMenu contextMenu;
-    private String from;
+    private String origin;
 
-    public void setAll(Image image, String title, String text, String subText) {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        MenuItem ignore = new MenuItem("Ignore");
+        MenuItem remove = new MenuItem("Remove");
+
+        contextMenu = new ContextMenu(ignore, remove);
+        ignore.setOnAction(event -> {
+            PushLocal.fetch().addFilteredNotification(getOrigin());
+            removeFromParent();
+            contextMenu.hide();
+        });
+        remove.setOnAction(event -> {
+            removeFromParent();
+            contextMenu.hide();
+        });
+
+        SimpleDateFormat formatDate = new SimpleDateFormat("h:mm a");
+        String time = formatDate.format(new Date());
+        this.time.setText(time);
+    }
+
+    public void setAll(Image image, String title, String text, String subText, String origin) {
         setImage(image);
         setTitle(title);
         setText(text);
         setSubText(subText);
+        setOrigin(origin);
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setOrigin(String origin) {
+        this.origin = origin;
     }
 
     public void setImage(Image image) {
@@ -70,22 +93,11 @@ public class NotificationController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        MenuItem ignore = new MenuItem("Ignore");
-        MenuItem remove = new MenuItem("Remove");
+    public String getOrigin() {
+        return origin;
+    }
 
-        contextMenu = new ContextMenu(ignore, remove);
-        ignore.setOnAction(event -> {
-            // TODO filter the notification
-        });
-        remove.setOnAction(event -> {
-            ((FlowPane) imageView.getParent().getParent()).getChildren().remove(imageView.getParent());
-            contextMenu.hide();
-        });
-
-        SimpleDateFormat formatDate = new SimpleDateFormat("h:mm a");
-        String time = formatDate.format(new Date());
-        this.time.setText(time);
+    public void removeFromParent() {
+        ((FlowPane) imageView.getParent().getParent()).getChildren().remove(imageView.getParent());
     }
 }
