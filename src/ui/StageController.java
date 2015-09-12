@@ -9,13 +9,13 @@ public class StageController {
 
     private Stage stage;
 
+    public Stage getStage() {
+        return stage;
+    }
+
     public void setStage(Stage stage) {
         this.stage = stage;
         stage.show();
-    }
-
-    public Stage getStage() {
-        return stage;
     }
 
     public void showStage() {

@@ -66,7 +66,7 @@ public class NotificationController implements Initializable {
     public void onMouseClicked(MouseEvent e) {
         if (e.getButton() == MouseButton.SECONDARY) {
             Node selectedNode = e.getPickResult().getIntersectedNode();
-            contextMenu.show(selectedNode, Side.RIGHT, 0,0);
+            contextMenu.show(selectedNode, Side.RIGHT, 0, 0);
         }
     }
 

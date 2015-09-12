@@ -1,9 +1,9 @@
 package network.client;
 
-import com.sun.jndi.dns.DnsName;
-
 import java.io.IOException;
-import java.net.*;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
@@ -51,8 +51,7 @@ public class UDPListener extends Thread {
             packet.setData(msg.getBytes());
             logs.add("Sending UDP Message: " + msg);
             socket.send(packet);
-        }
-        else if (data.contains("connect")) {
+        } else if (data.contains("connect")) {
             logs.add("Attemping to connect to sender: " + packet.getAddress());
             listener.onConnectRequest(packet.getAddress());
         }

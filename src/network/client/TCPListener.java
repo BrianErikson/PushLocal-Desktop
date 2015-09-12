@@ -1,6 +1,5 @@
 package network.client;
 
-import common.OsUtils;
 import main.PushLocal;
 
 import java.io.IOException;
@@ -73,8 +72,7 @@ public class TCPListener extends Thread {
             logs.add("From: " + from + "Title: " + title + " Text: " + text + " Subtext: " + subText);
             PushLocal.fetch().postNotification(from,
                     title, text, subText);
-        }
-        else if (msg.contains("Indeed,")) {
+        } else if (msg.contains("Indeed,")) {
             sendMessage("Nice comma.");
         }
     }

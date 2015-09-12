@@ -25,8 +25,8 @@ import java.util.ArrayList;
 public class PushLocal extends Application {
 
     private static PushLocal singleton;
-    private StageController stageController;
     private static SimpleStringProperty LOGGER = new SimpleStringProperty("Application initializing...");
+    private StageController stageController;
     private NetClient netClient;
     private TrayIcon trayIcon;
     private String iconPath;
@@ -77,8 +77,7 @@ public class PushLocal extends Application {
             trayIcon.setImageAutoSize(true);
             try {
                 systemTray.add(trayIcon);
-            }
-            catch (AWTException e) {
+            } catch (AWTException e) {
                 log(e.getMessage());
             }
         }

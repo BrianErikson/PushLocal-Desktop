@@ -30,8 +30,7 @@ public class OsUtils {
         PushLocal pl = PushLocal.fetch();
         if (isWindows()) {
             pl.getTrayIcon().displayMessage(title, text + "\n" + subText, TrayIcon.MessageType.NONE);
-        }
-        else if (isLinux()) {
+        } else if (isLinux()) {
             Runtime.getRuntime().exec(new String[]{
                     "notify-send",
                     title,

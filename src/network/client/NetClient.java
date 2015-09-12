@@ -10,10 +10,10 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * Created by brian on 8/30/15.
  */
 public class NetClient extends Thread {
-    public static final String UNIT = String.valueOf((char)31);
-    public static final String RECORD = String.valueOf((char)30);
-    public static final String GROUP = String.valueOf((char)29);
-    public static final String FILE = String.valueOf((char)28);
+    public static final String UNIT = String.valueOf((char) 31);
+    public static final String RECORD = String.valueOf((char) 30);
+    public static final String GROUP = String.valueOf((char) 29);
+    public static final String FILE = String.valueOf((char) 28);
 
     private volatile boolean running = false;
     private ConcurrentLinkedQueue<String> logs;
