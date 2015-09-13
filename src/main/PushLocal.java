@@ -90,7 +90,7 @@ public class PushLocal extends Application {
     }
 
     public synchronized void log(String text) {
-        LOGGER.setValue(LOGGER.getValueSafe() + "\n" + text);
+        Platform.runLater(() -> LOGGER.setValue(LOGGER.getValueSafe() + "\n" + text));
     }
 
     public TrayIcon getTrayIcon() {
@@ -122,9 +122,12 @@ public class PushLocal extends Application {
             controller.setOrigin(origin);
             controller.setTitle(title);
             controller.setText(text);
+            if (subText.contains("null"))
+                subText = "";
             controller.setSubText(subText);
             notificationNodes.add(notification);
             if (stageController.getStage() instanceof DebugMenu) {
+                System.out.println("Is intance of debugMenu");
                 Platform.runLater(() -> ((DebugMenu) stageController.getStage()).addNotification(notification));
             }
         }

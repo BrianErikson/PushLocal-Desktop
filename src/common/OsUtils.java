@@ -29,15 +29,30 @@ public class OsUtils {
     public static void postNotification(String title, String text, String subText) throws IOException {
         PushLocal pl = PushLocal.fetch();
         if (isWindows()) {
-            pl.getTrayIcon().displayMessage(title, text + "\n" + subText, TrayIcon.MessageType.NONE);
+            if(subText.contains("null")){
+                pl.getTrayIcon().displayMessage(title, text + "\n", TrayIcon.MessageType.NONE);
+            }
+            else {
+                pl.getTrayIcon().displayMessage(title, text + "\n" + subText, TrayIcon.MessageType.NONE);
+            }
         } else if (isLinux()) {
-            Runtime.getRuntime().exec(new String[]{
-                    "notify-send",
-                    title,
-                    text + "\\n<i>"
-                            + subText + "</i>",
-                    //TODO "-i " + pl.getIconPath()
-            });
+            if(subText.contains("null")){
+                Runtime.getRuntime().exec(new String[]{
+                        "notify-send",
+                        title,
+                        text + "\\n<i>",
+                        //TODO "-i " + pl.getIconPath()
+                });
+            }
+            else {
+                Runtime.getRuntime().exec(new String[]{
+                        "notify-send",
+                        title,
+                        text + "\\n<i>"
+                                + subText + "</i>",
+                        //TODO "-i " + pl.getIconPath()
+                });
+            }
         }
     }
 }

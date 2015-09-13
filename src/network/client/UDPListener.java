@@ -58,6 +58,8 @@ public class UDPListener extends Thread {
     }
 
     public void dispose() {
-        socket.close();
+        if ((socket != null)) {
+            socket.close();
+        }
     }
 }
