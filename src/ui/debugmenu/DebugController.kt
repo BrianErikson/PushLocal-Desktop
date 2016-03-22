@@ -20,9 +20,9 @@ class DebugController : Initializable {
     @FXML var notification_box: FlowPane? = null
     @FXML var filterList: ListView<String>? = null
     @FXML var filterContextMenu: ContextMenu? = null
-    @FXML private val console: TextArea? = null
+    @FXML private var console: TextArea? = null
 
-    override fun initialize(location: URL, resources: ResourceBundle) {
+    override fun initialize(location: URL?, resources: ResourceBundle?) {
 
     }
 

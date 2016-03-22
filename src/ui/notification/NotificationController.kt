@@ -32,7 +32,7 @@ class NotificationController : Initializable {
     private var contextMenu: ContextMenu? = null
     var origin: String = ""
 
-    override fun initialize(location: URL, resources: ResourceBundle) {
+    override fun initialize(location: URL?, resources: ResourceBundle?) {
         val ignore = MenuItem("Ignore")
         val remove = MenuItem("Remove")
 

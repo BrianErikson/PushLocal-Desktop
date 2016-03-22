@@ -6,12 +6,14 @@ import javafx.stage.Stage
  * Created by brian on 8/29/15.
  */
 class StageController {
-
     var stage: Stage? = null
-        set(stage) {
-            this.stage = stage
-            stage?.show()
-        }
+    get() {
+        return field
+    }
+    set(value) {
+        field = value
+        field?.show()
+    }
 
     fun showStage() {
         if (this.stage != null) {

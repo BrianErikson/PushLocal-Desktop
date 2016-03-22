@@ -10,14 +10,15 @@ import javafx.scene.control.SplitPane
 import javafx.stage.Stage
 
 import java.io.IOException
-import java.util.ArrayList
+import java.net.URL
+import java.util.*
 import java.util.function.Consumer
 
 class DebugMenu(filterList: ObservableList<String>, log: SimpleStringProperty, width: Int, height: Int, notifications: ArrayList<Node>) : Stage() {
     private var debugController: DebugController? = null
 
     init {
-        val loader = FXMLLoader(javaClass.getResource("debugMenu.fxml"))
+        val loader = FXMLLoader(javaClass.getResource("/debugMenu.fxml"))
         try {
             loader.load<Any>()
             debugController = loader.getController<DebugController>()

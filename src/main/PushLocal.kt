@@ -3,11 +3,9 @@ package main
 import common.OsUtils
 import javafx.application.Application
 import javafx.application.Platform
-import javafx.beans.property.SimpleListProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.collections.FXCollections
 import javafx.collections.ObservableList
-import javafx.collections.transformation.SortedList
 import javafx.fxml.FXMLLoader
 import javafx.scene.Node
 import javafx.stage.Stage
@@ -20,37 +18,30 @@ import java.awt.*
 import java.io.File
 import java.io.IOException
 import java.net.URISyntaxException
-import java.net.URL
 import java.util.ArrayList
 
 /**
  * Created by brian on 8/29/15.
  */
-
-fun main(args: Array<String>) {
-    PushLocal(args)
-}
-
-class PushLocal(args: Array<String>) : Application() {
+class PushLocal : Application() {
     var trayIcon: TrayIcon? = null
     private val filteredNotifications: ObservableList<String> = FXCollections.observableArrayList<String>()
     private val stageController: StageController = StageController()
+    private val notificationNodes: ArrayList<Node> = ArrayList()
+    private val logger = SimpleStringProperty("Application initializing...")
     private var netClient: NetClient? = null
-    private var iconPath: String = ""
-    private val notificationNodes: ArrayList<Node> = ArrayList<Node>()
 
     init {
         singleton = this;
-        Application.launch(*args)
     }
 
     @Throws(Exception::class)
     override fun start(primaryStage: Stage) {
-        initIconPath()
         addToSystemTray()
         primaryStage.close() // Get rid of useless init stage
 
-        stageController.stage = DebugMenu(filteredNotifications, LOGGER, 1024, 768, notificationNodes)
+        System.out.println("$filteredNotifications $logger $notificationNodes")
+        stageController.stage = DebugMenu(filteredNotifications, logger, 1024, 768, notificationNodes)
         log("Application initialized")
 
         if (trayIcon != null)
@@ -63,17 +54,10 @@ class PushLocal(args: Array<String>) : Application() {
         postNotification("PushLocal.Desktop", "Test", "First Line", "Second Line")
     }
 
-    @Throws(URISyntaxException::class)
-    private fun initIconPath() {
-        val url = javaClass.getResource("PL.png")
-        val file = File(url.toURI())
-        iconPath = file.absolutePath
-    }
-
     private fun addToSystemTray() {
         if (SystemTray.isSupported()) {
             val systemTray = SystemTray.getSystemTray()
-            val icon = Toolkit.getDefaultToolkit().getImage("src/main/PL.png")
+            val icon = Toolkit.getDefaultToolkit().getImage("/PL.png")
             trayIcon = TrayIcon(icon, "Push Local")
             trayIcon!!.isImageAutoSize = true
             try {
@@ -85,7 +69,7 @@ class PushLocal(args: Array<String>) : Application() {
     }
 
     @Synchronized fun log(text: String) {
-        Platform.runLater { LOGGER.value = LOGGER.valueSafe + "\n" + text }
+        Platform.runLater { logger.value = logger.valueSafe + "\n" + text }
     }
 
     // main & TCP thread
@@ -99,8 +83,7 @@ class PushLocal(args: Array<String>) : Application() {
 
         if (!filtered) {
             OsUtils.postNotification(title, text, subText)
-
-            val loader = FXMLLoader(NotificationController::class.java.getResource("notification.fxml"))
+            var loader: FXMLLoader = FXMLLoader(javaClass.getResource("/notification.fxml"))
             val notification = loader.load<Node>()
             val controller = loader.getController<NotificationController>()
             controller.origin = origin
@@ -128,16 +111,18 @@ class PushLocal(args: Array<String>) : Application() {
     }
 
     companion object {
-        private val LOGGER = SimpleStringProperty("Application initializing...")
-        private var _singleton: PushLocal? = null
-        var singleton : PushLocal?
+        var singleton : PushLocal? = null
         get() {
-            return _singleton
+            return field
         }
         set(value) {
-            if (_singleton == null) {
-                _singleton = value
+            if (singleton == null) {
+                field = value
             }
+        }
+
+        @JvmStatic fun main(args: Array<String>) {
+            launch(PushLocal::class.java)
         }
     }
 }
