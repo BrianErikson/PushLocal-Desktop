@@ -42,9 +42,7 @@ class PushLocal : Application() {
         primaryStage.close() // Get rid of useless init stage
 
         stageController.stage = DebugMenu(filteredNotifications, logger, 1024, 768, notificationNodes)
-        if (trayIcon != null) {
-            stageController.stage?.icons?.add(javafx.scene.image.Image("PL.png"))
-        }
+        stageController.stage?.icons?.add(javafx.scene.image.Image("PL.png"))
         stageController.showStage()
         log("Application initialized")
 
