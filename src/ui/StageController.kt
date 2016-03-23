@@ -7,19 +7,11 @@ import javafx.stage.Stage
  */
 class StageController {
     var stage: Stage? = null
-    get() {
-        return field
-    }
-    set(value) {
-        field = value
-        field?.show()
-    }
 
     fun showStage() {
         if (this.stage != null) {
             this.stage!!.width = 1024.0
             this.stage!!.height = 768.0
-            this.stage!!.isMaximized = true
             this.stage!!.show();
         }
     }

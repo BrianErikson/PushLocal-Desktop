@@ -15,16 +15,17 @@ import ui.debugmenu.DebugMenu
 import ui.notification.NotificationController
 
 import java.awt.*
-import java.io.File
 import java.io.IOException
-import java.net.URISyntaxException
 import java.util.ArrayList
 
 /**
  * Created by brian on 8/29/15.
  */
 class PushLocal : Application() {
+
     var trayIcon: TrayIcon? = null
+    val icon: Image = Toolkit.getDefaultToolkit().getImage(javaClass.getResource("/PL.png"))
+
     private val filteredNotifications: ObservableList<String> = FXCollections.observableArrayList<String>()
     private val stageController: StageController = StageController()
     private val notificationNodes: ArrayList<Node> = ArrayList()
@@ -40,8 +41,11 @@ class PushLocal : Application() {
         addToSystemTray()
         primaryStage.close() // Get rid of useless init stage
 
-        System.out.println("$filteredNotifications $logger $notificationNodes")
         stageController.stage = DebugMenu(filteredNotifications, logger, 1024, 768, notificationNodes)
+        if (trayIcon != null) {
+            stageController.stage?.icons?.add(javafx.scene.image.Image("PL.png"))
+        }
+        stageController.showStage()
         log("Application initialized")
 
         if (trayIcon != null)
@@ -57,7 +61,6 @@ class PushLocal : Application() {
     private fun addToSystemTray() {
         if (SystemTray.isSupported()) {
             val systemTray = SystemTray.getSystemTray()
-            val icon = Toolkit.getDefaultToolkit().getImage("/PL.png")
             trayIcon = TrayIcon(icon, "Push Local")
             trayIcon!!.isImageAutoSize = true
             try {
